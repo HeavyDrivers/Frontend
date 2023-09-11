@@ -34,6 +34,7 @@ export function Home() {
       <Typography variant="h2" color="blue-gray" className="mb-10">
         Welcome to Telemetry Portal!
       </Typography>
+    
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
@@ -52,6 +53,7 @@ export function Home() {
           />
         ))}
       </div>
+        {/*
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsChartsData.map((props) => (
           <StatisticsChart
@@ -254,7 +256,7 @@ export function Home() {
             )}
           </CardBody>
         </Card>
-      </div>
+                  </div> */}
     </div>
   );
 }

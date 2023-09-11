@@ -31,6 +31,20 @@ export const routes = [
         path: "/fleet-management",
         element: <Maps />,
       },
+      {/*
+      {
+        icon: <UserCircleIcon {...icon} />,
+        name: "profile",
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        icon: <TableCellsIcon {...icon} />,
+        name: "tables",
+        path: "/tables",
+        element: <Tables />,
+      },
+    */}
     ],
   },
   {
@@ -49,6 +63,7 @@ export const routes = [
         path: "/sign-up",
         element: <SignUp />,
       },
+            
     ],
   },
 ];
