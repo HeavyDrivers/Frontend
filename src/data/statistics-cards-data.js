@@ -1,12 +1,14 @@
+// First four blocks of Data - Drivers, Fuel Efficiency, Distance covered, Speed
+
 import {
   RocketLaunchIcon,
-  TruckIcon
+  TruckIcon, ChartBarIcon, UserGroupIcon
 } from "@heroicons/react/24/solid";
 
 export const statisticsCardsData = [
   {
     color: "blue",
-    icon: TruckIcon,
+    icon: UserGroupIcon,
     title: "Drivers",
     value: "3,462",
     footer: {
@@ -17,13 +19,35 @@ export const statisticsCardsData = [
   },
   {
     color: "orange",
-    icon: RocketLaunchIcon,
+    icon: TruckIcon,
     title: "Distance Covered",
-    value: "$103,430",
+    value: "380 Km",
     footer: {
       color: "text-green-500",
       value: "+5%",
       label: "than yesterday",
+    },
+  },
+  {
+    color: "blue",
+    icon: RocketLaunchIcon,
+    title: "Speed",
+    value: "40 Km/h",
+    footer: {
+      color: "text-red-500",
+      value: "-2%",
+      label: "than average",
+    },
+  },
+  {
+    color: "blue",
+    icon: ChartBarIcon,
+    title: "Fuel Efficiency",
+    value: "80%",
+    footer: {
+      color: "text-red-500",
+      value: "-2%",
+      label: "than ideal",
     },
   },
 ];
