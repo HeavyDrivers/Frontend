@@ -1,32 +1,42 @@
 import React from 'react'
 import { mappls, mappls_plugin } from  'mappls-web-maps'
+import { useState } from 'react';
+import axios from 'axios';
 
 const LiveLocation = () => {
-    const styleMap  = {width:  '1300px', height:  '700px', display:'inline-block'}
-
-    const generatemapview = async () => {
+  const [locationdata, setLocationdata] = useState("");
+  const [latitude, setLatitude] = useState(12.9102775);
+  const [longitude, setLongitude] = useState(77.56497283333333)
+  const styleMap  = {width:  '1300px', height:  '700px', display:'inline-block'}
   
-      const  mapProps  = { center: [12.910016, 77.546868], traffic:  false, zoom: 15, geolocation:  false, clickableIcons:  false }
-      var mapObject, markerObject;
+  
+  
+  const generatemapview = async () => {
+    await axios
+      .get("https://backend-for-sih.onrender.com/get_locations")
+      .then((res) => {
+      console.log(res.data);
+      setLocationdata(res.data);
+      let currentLocation = locationdata[locationdata.length - 1]
+      setLatitude(currentLocation.latitude)
+      setLongitude(currentLocation.longitude)
       
-      var mapplsClassObject=  new  mappls();
-      var mapplsPluginObject =  new  mappls_plugin();
+    });
+
+      let mapObject;
       
+      let mapplsClassObject=  new  mappls();
+      const  mapProps  = {center: [latitude, longitude], traffic:  false, zoom: 15, geolocation:  false, clickableIcons:  false }
   
         mapplsClassObject.initialize("96233e993b889a2ca1bf4520451c693c",()=>{
-            mapObject = mapplsClassObject.Map({id:  "map1", properties: mapProps});
-        const getmarker = () =>{
-          markerObject = mapplsClassObject.marker({
-            map:  mapObject,
-            position:{lat:28.5512908, lng:77.26809282},
-          });
-  
-        }  
-        mapObject.on("load", ()=>{
-          
-        })
-  
-  
+          mapObject = mapplsClassObject.Map({id:  "map1", properties: mapProps});
+   
+          mapObject.on("load", ()=>{
+            markerObject = mapplsClassObject.Marker({
+              map:  mapObject,
+              position:{lat:latitude, lng:longitude},
+            });            
+          })  
         });
     }
    // useEffect(() => { 
