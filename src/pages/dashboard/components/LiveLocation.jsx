@@ -4,12 +4,10 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const LiveLocation = () => {
-  const [locationdata, setLocationdata] = useState("");
+  const [locationdata, setLocationdata] = useState([]);
   const [latitude, setLatitude] = useState(12.9102775);
-  const [longitude, setLongitude] = useState(77.56497283333333)
+  const [longitude, setLongitude] = useState( 77.56497283333333)
   const styleMap  = {width:  '1300px', height:  '700px', display:'inline-block'}
-  
-  
   
   const generatemapview = async () => {
     await axios
@@ -17,6 +15,7 @@ const LiveLocation = () => {
       .then((res) => {
       console.log(res.data);
       setLocationdata(res.data);
+
       let currentLocation = locationdata[locationdata.length - 1]
       setLatitude(currentLocation.latitude)
       setLongitude(currentLocation.longitude)
