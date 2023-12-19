@@ -91,7 +91,7 @@ export const statisticsChartsData = [
     description: "Last Campaign Performance",
     footer: "just updated",
     chart: completedTasksChart,
-  },
+  }, 
 ];
 
 export default statisticsChartsData;

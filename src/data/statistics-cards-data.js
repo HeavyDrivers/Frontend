@@ -9,19 +9,19 @@ export const statisticsCardsData = [
   {
     color: "blue",
     icon: UserGroupIcon,
-    title: "Drivers",
-    value: "3,462",
+    title: "Driver Status",
+    value: "Idle",
     footer: {
       color: "text-red-500",
-      value: "-2%",
-      label: "than yesterday",
-    },
+      value: "",
+      label: "",
+    }, 
   },
   {
     color: "orange",
     icon: TruckIcon,
-    title: "Distance Covered",
-    value: "380 Km",
+    title: "Load",
+    value: "800kg",
     footer: {
       color: "text-green-500",
       value: "+5%",

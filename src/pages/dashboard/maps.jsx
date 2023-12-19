@@ -37,8 +37,7 @@ const Maps = () => {
               <TabsHeader>
                 <Tab value={"location"}>Location Tracking</Tab>
                 <Tab value={"realtime"}>Route Tracking</Tab>
-                <Tab value={"speed"}>Speed/Idle Tracking</Tab>
-                <Tab value={"load"}>Load Tracking</Tab>
+                
               </TabsHeader>
               <TabsBody className="overflow-hidden">
                 <TabPanel value={"location"} className="overflow-hidden flex flex-col">
@@ -51,13 +50,7 @@ const Maps = () => {
                   <RouteTracker/>
 
                 </TabPanel>
-                <TabPanel value={"speed"} className="pt-20">
-                  <SpeedIdle />
-
-                </TabPanel>
-                <TabPanel value={"load"} className="overflow-hidden flex flex-col">
-
-                </TabPanel>
+                
               </TabsBody>
             </Tabs>
           </CardBody>

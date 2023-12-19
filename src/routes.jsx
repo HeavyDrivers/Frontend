@@ -31,7 +31,7 @@ export const routes = [
         path: "/fleet-management",
         element: <Maps />,
       },
-      {/*
+    
       {
         icon: <UserCircleIcon {...icon} />,
         name: "profile",
@@ -44,7 +44,7 @@ export const routes = [
         path: "/tables",
         element: <Tables />,
       },
-    */}
+
     ],
   },
   {
