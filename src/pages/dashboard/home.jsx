@@ -1,6 +1,8 @@
 import React from "react";
 import {
   Typography,
+  Select,
+  Option,
   Card,
   CardHeader,
   CardBody,
@@ -12,12 +14,14 @@ import {
   Avatar,
   Tooltip,
   Progress,
+  Input,
+  Button
 } from "@material-tailwind/react";
 import {
   ClockIcon,
   CheckIcon,
   EllipsisVerticalIcon,
-  ArrowUpIcon,
+  ArrowUpIcon, CreditCardIcon
 } from "@heroicons/react/24/outline";
 import { StatisticsCard } from "@/widgets/cards";
 import { StatisticsChart } from "@/widgets/charts";
@@ -34,6 +38,20 @@ export function Home() {
       <Typography variant="h2" color="blue-gray" className="mb-10">
         Welcome to Telemetry Portal!
       </Typography>
+      <div className="flex flex-row gap-3">
+          <Typography variant="h4" color="blue-gray" className="mb-10">
+                Driver Number: 
+          </Typography>
+      
+          <div className="w-72">
+            <Select label="Select driver ID">
+              <Option>12242</Option>
+              <Option>34123</Option>
+              <Option>23123</Option>
+              
+            </Select>
+          </div>
+      </div>
     
       <div className="mb-12 px-20 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-2">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
@@ -70,6 +88,7 @@ export function Home() {
             />
             ))}
         </div>
+        
         {/*
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsChartsData.map((props) => (
