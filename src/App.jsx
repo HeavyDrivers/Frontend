@@ -3,13 +3,18 @@ import { Dashboard, Auth } from "@/layouts";
 import { SignOutButton, SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react"
 import { ClerkProvider } from "@clerk/clerk-react";
 import { Button, Typography} from "@material-tailwind/react";
+import './App.css'
 
 function App() {
   return (
-    <div>
+    <div className="landing">
       <div className="flex flex-col items-center justify-center">
+        <div className="header">COALSENSE CONNECT</div>
+          <div className="description">
+           Drive Data Beyond Limits: Empower Your Fleet with Unrivaled Telemetry Mastery 
+          </div>
+          <br/>
         <SignedOut>
-          <Typography>This content is public. Only signed out users can see this.</Typography>
           <Button color="blue">
             <SignInButton />
           </Button>        
