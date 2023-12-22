@@ -1,4 +1,5 @@
-import React from "react";
+import React , {useState, useEffect}from "react";
+import axios from "axios";
 import {
   Typography,
   Select,
@@ -31,29 +32,55 @@ import {
   projectsTableData,
   ordersOverviewData,
 } from "@/data";
+import SpeedData from "@/apiData/SpeedData";
+import CoolantData from "@/apiData/CoolantData";
+import RpmData from "@/apiData/RpmData"
+import TempData from "@/apiData/TempData";
+import Temperature from "@/apiData/Temperature";
+import ChartComponent from "@/apiData/ChartComponent";
+import model from "@/ml/MlModel";
+import MlModel from "@/ml/MlModel";
 
 export function Home() {
+
+  
+
+  // const generateSpeed = async () => {
+  //   await axios
+  //     .get("https://tcu-backend-69pu.onrender.com/get_speed")
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setSpeedData(res.data.slice(-10));
+  //     });
+  // }
+
+
+  
+
+
   return (
     <div className="mt-12">
       <Typography variant="h2" color="blue-gray" className="mb-10">
         Welcome to Telemetry Portal!
       </Typography>
       <div className="flex flex-row gap-3">
-          <Typography variant="h4" color="blue-gray" className="mb-10">
-                Driver Number: 
-          </Typography>
-      
-          <div className="w-72">
-            <Select label="Select driver ID">
-              <Option>12242</Option>
-              <Option>34123</Option>
-              <Option>23123</Option>
-              
-            </Select>
-          </div>
+        <Typography variant="h4" color="blue-gray" className="mb-10">
+          Driver Number:
+        </Typography>
+
+        <div className="w-72">
+          <Select label="Select driver ID">
+            <Option>12242</Option>
+            <Option>34123</Option>
+            <Option>23123</Option>
+
+          </Select>
+        </div>
       </div>
-    
+
       <div className="mb-12 px-20 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-2">
+
+
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
             key={title}
@@ -71,25 +98,36 @@ export function Home() {
           />
         ))}
       </div>
-      <div className="mb-6  grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3 ">
-            {statisticsChartsData.map((props) => (
-            <StatisticsChart
-                key={props.title}
-                {...props}
-                footer={
-                <Typography
-                    variant="small"
-                    className="flex items-center font-normal text-blue-gray-600"
-                >
-                    <ClockIcon strokeWidth={2} className="h-4 w-4 text-inherit" />
-                    &nbsp;{props.footer}
-                </Typography>
-                }
-            />
-            ))}
+      <div className="">
+       {/*<div className="flex flex-col gap-2 items-center">
+          <Typography className="font-bold text-black text-2xl" >Speed Data</Typography>
+          <SpeedData />
         </div>
+         
+        <div className="flex flex-col gap-2 items-center">
+          <Typography className="font-bold text-black text-2xl" >Coolant data</Typography>
+          <CoolantData />
+        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <Typography className="font-bold text-black text-2xl" >RPM data</Typography>
+          <RpmData />
+        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <Typography className="font-bold text-black text-2xl" >Temperature</Typography>
+          <TempData />
+        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <Typography className="font-bold text-black text-2xl" >Temperature</Typography>
+          <Temperature />
+          </div>*/ }
+          <ChartComponent />
+         
         
-        {/*
+      </div>
+      <MlModel/>
+      
+
+      {/*
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsChartsData.map((props) => (
           <StatisticsChart

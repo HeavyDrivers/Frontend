@@ -2,30 +2,45 @@ import React from 'react'
 import { mappls, mappls_plugin } from  'mappls-web-maps'
 import { useState } from 'react';
 import axios from 'axios';
+import { Button, colors } from '@mui/material';
 
 const LiveLocation = () => {
-  const [locationdata, setLocationdata] = useState([]);
-  const [latitude, setLatitude] = useState(12.9102775);
-  const [longitude, setLongitude] = useState( 77.56497283333333)
+
+  const [latitude, setLatitude] = useState([]);
+  const [longitude, setLongitude] = useState();
+
   const styleMap  = {width:  '1300px', height:  '700px', display:'inline-block'}
-  
+  let arr = [];
+  let num1, num2;
   const generatemapview = async () => {
-    await axios
-      .get("https://backend-for-sih.onrender.com/get_locations")
-      .then((res) => {
-      console.log(res.data);
-      setLocationdata(res.data);
-
-      let currentLocation = locationdata[locationdata.length - 1]
-      setLatitude(currentLocation.latitude)
-      setLongitude(currentLocation.longitude)
+    try {
+      const response = await axios.post("https://tcu-backend-69pu.onrender.com/get_tempfrom_ubi");
       
-    });
+      const ans = response.data;
+      console.log(ans)
 
+     // console.log("Temp Raw Data:", ans);
+      const prep = Array.from(ans);
+     // console.log(typeof(prep))
+      const lat = prep.slice(-10).map(entry => parseFloat(entry.latitude));
+     // console.log(typeof(lat));
+      setLatitude(lat);
+
+      const lon = prep.slice(-10).map(entry => parseFloat(entry.longitude));
+      console.log("long data:", lon);
+      setLongitude(lon);
+      arr = [lat[5],lon[5]];
+      //console.log(typeof(arr))
+      num1 = parseFloat(lat[0]);
+      num2 = parseFloat(lon[0]);
+    } catch (error) {
+      console.error("Error fetching or processing speed data:", error);
+    }
+      //console.log(latitude);
       let mapObject;
       
       let mapplsClassObject=  new  mappls();
-      const  mapProps  = {center: [latitude, longitude], traffic:  false, zoom: 15, geolocation:  false, clickableIcons:  false }
+      const  mapProps  = {center: arr, traffic:  false, zoom: 15, geolocation:  false, clickableIcons:  false }
   
         mapplsClassObject.initialize("96233e993b889a2ca1bf4520451c693c",()=>{
           mapObject = mapplsClassObject.Map({id:  "map1", properties: mapProps});
@@ -33,7 +48,7 @@ const LiveLocation = () => {
           mapObject.on("load", ()=>{
             markerObject = mapplsClassObject.Marker({
               map:  mapObject,
-              position:{lat:latitude, lng:longitude},
+              position:{lat:num1 , lng:num2},
             });            
           })  
         });
@@ -44,7 +59,7 @@ const LiveLocation = () => {
   return (
     <div>
          <div className="overflow-hidden flex flex-col">
-            <button onClick={() =>generatemapview()}>Get Route</button>
+            <Button onClick={() =>generatemapview()}>Get Route</Button>
             <div id="map1" style={styleMap}></div>
         </div>        
     </div>

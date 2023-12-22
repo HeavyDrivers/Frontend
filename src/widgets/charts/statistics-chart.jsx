@@ -8,11 +8,12 @@ import {
 import PropTypes from "prop-types";
 import Chart from "react-apexcharts";
 
-export function StatisticsChart({ color, chart, title, description, footer }) {
+export function StatisticsChart({ color, chart, title, description, footer, Apidata }) {
+  console.log("test",Apidata)
   return (
     <Card>
       <CardHeader variant="gradient" color={color}>
-        <Chart {...chart} />
+        <Chart {...chart} series = {Apidata}/>
       </CardHeader>
       <CardBody className="p-6">
         <Typography variant="h6" color="blue-gray">

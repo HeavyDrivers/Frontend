@@ -29,7 +29,7 @@ export const statisticsCardsData = [
     },
   },
   {
-    color: "blue",
+    color: "green",
     icon: RocketLaunchIcon,
     title: "Speed",
     value: "40 Km/h",
@@ -40,7 +40,7 @@ export const statisticsCardsData = [
     },
   },
   {
-    color: "blue",
+    color: "red",
     icon: ChartBarIcon,
     title: "Fuel Efficiency",
     value: "80%",

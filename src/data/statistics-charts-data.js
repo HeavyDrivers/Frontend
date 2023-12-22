@@ -1,4 +1,5 @@
 import { chartsConfig } from "@/configs";
+import  speedData  from "@/apiData/SpeedData";
 
 const websiteViewsChart = {
   type: "bar",
@@ -31,7 +32,7 @@ const dailySalesChart = {
   series: [
     {
       name: "Sales",
-      data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+      data: [1,2,3,4,5,6,7,],
     },
   ],
   options: {
@@ -87,8 +88,8 @@ export const statisticsChartsData = [
   },
   {
     color: "green",
-    title: "Completed Tasks",
-    description: "Last Campaign Performance",
+    title: "Engine Performance",
+    description: "Engine Performance Score based on MAF, engine load, coolant temperature",
     footer: "just updated",
     chart: completedTasksChart,
   }, 
