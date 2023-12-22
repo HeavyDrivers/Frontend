@@ -43,16 +43,9 @@ import MlModel from "@/ml/MlModel";
 
 export function Home() {
 
-  
 
-  // const generateSpeed = async () => {
-  //   await axios
-  //     .get("https://tcu-backend-69pu.onrender.com/get_speed")
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setSpeedData(res.data.slice(-10));
-  //     });
-  // }
+
+  
 
 
   
@@ -124,7 +117,13 @@ export function Home() {
          
         
       </div>
-      <MlModel/>
+      <div className="">
+      <Typography variant="h2" color="blue-gray" className="mb-10">
+        Data Analysis
+      </Typography>
+        <MlModel/>
+      </div>
+      
       
 
       {/*
@@ -331,6 +330,7 @@ export function Home() {
           </CardBody>
         </Card>
                   </div> */}
+                
     </div>
   );
 }

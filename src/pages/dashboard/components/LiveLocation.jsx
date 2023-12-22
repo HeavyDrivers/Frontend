@@ -59,7 +59,7 @@ const LiveLocation = () => {
   return (
     <div>
          <div className="overflow-hidden flex flex-col">
-            <Button onClick={() =>generatemapview()}>Get Route</Button>
+            <Button onClick={() =>generatemapview()}>Get Current Location</Button>
             <div id="map1" style={styleMap}></div>
         </div>        
     </div>

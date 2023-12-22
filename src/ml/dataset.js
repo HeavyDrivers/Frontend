@@ -1,4 +1,4 @@
-[
+export const dataset =[
     {
         "x": 0.09,
         "y": -0.04
@@ -400,3 +400,4 @@
         "y": -0.04
     }
 ]
+export default dataset
