@@ -8,18 +8,22 @@ import './App.css'
 function App() {
   return (
     <div className="landing">
-      <div className="flex flex-col items-center justify-center">
+      
+        
+        <SignedOut>
+        <div className="flex flex-col items-center justify-center">
         <div className="header">COALSENSE CONNECT</div>
           <div className="description">
            Drive Data Beyond Limits: Empower Your Fleet with Unrivaled Telemetry Mastery 
           </div>
           <br/>
-        <SignedOut>
-          <Button color="blue">
-            <SignInButton />
-          </Button>        
+        
+                  <Button color="blue">
+                    <SignInButton />
+                  </Button>  
+          </div>      
         </SignedOut>
-      </div>
+      
       
       <div>
         <SignedIn>
