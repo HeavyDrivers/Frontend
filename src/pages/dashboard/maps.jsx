@@ -33,7 +33,7 @@ const Maps = () => {
             </Typography>
           </CardHeader>
           <CardBody className="flex flex-col gap-4 p-4">
-            <Tabs value="html">
+            <Tabs value="location">
               <TabsHeader>
                 <Tab value={"location"}>Location Tracking</Tab>
                 <Tab value={"realtime"}>Route Tracking</Tab>

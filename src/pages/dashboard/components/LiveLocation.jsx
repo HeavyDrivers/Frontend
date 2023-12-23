@@ -3,6 +3,8 @@ import { mappls, mappls_plugin } from  'mappls-web-maps'
 import { useState } from 'react';
 import axios from 'axios';
 import { Button, colors } from '@mui/material';
+import imge from "./marker.png"
+import { Typography } from '@material-tailwind/react';
 
 const LiveLocation = () => {
 
@@ -12,6 +14,7 @@ const LiveLocation = () => {
   const styleMap  = {width:  '1300px', height:  '700px', display:'inline-block'}
   let arr = [];
   let num1, num2;
+  
   const generatemapview = async () => {
     try {
       const response = await axios.post("https://tcu-backend-69pu.onrender.com/get_tempfrom_ubi");
@@ -49,6 +52,7 @@ const LiveLocation = () => {
             markerObject = mapplsClassObject.Marker({
               map:  mapObject,
               position:{lat:num1 , lng:num2},
+              icon: imge
             });            
           })  
         });
@@ -59,7 +63,16 @@ const LiveLocation = () => {
   return (
     <div>
          <div className="overflow-hidden flex flex-col">
-            <Button onClick={() =>generatemapview()}>Get Current Location</Button>
+     
+         <Button
+                variant="gradient" color="blue-gray" className="ml-8 p-2" fullWidth onClick={() =>generatemapview()}>
+                  <Typography
+                    color="inherit"
+                    className="font-medium capitalize"
+                  >
+                    Generate Route Map
+                  </Typography>
+                  </Button>
             <div id="map1" style={styleMap}></div>
         </div>        
     </div>

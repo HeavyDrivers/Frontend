@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LineChart } from "@mui/x-charts";
+import { LineChart, BarChart } from "@mui/x-charts";
 import {
     Typography
   } from "@material-tailwind/react";
@@ -23,13 +23,13 @@ const ChartComponent = () => {
                 
                 
                 const prep = Array.from(ans);
-                const temp = prep.slice(-10).map(entry => parseInt(entry.temperature));
-                const rpm = prep.slice(-10).map(entry => parseInt(entry.rpm));
-                const gyrox = prep.slice(-10).map(entry => parseFloat(entry.maxGyroX));
-                const gyroy = prep.slice(-10).map(entry => parseFloat(entry.maxGyroY));
-                const AccelX =prep.slice(-10).map(entry => parseFloat(entry.maxAccelX));
-                const AccelY =prep.slice(-10).map(entry => parseFloat(entry.maxAccelY));
-                const AccelZ =prep.slice(-10).map(entry => parseFloat(entry.maxAccelZ ));
+                const temp = prep.map(entry => parseInt(entry.temperature));
+                const rpm = prep.map(entry => parseInt(entry.rpm));
+                const gyrox = prep.map(entry => parseFloat(entry.maxGyroX));
+                const gyroy = prep.map(entry => parseFloat(entry.maxGyroY));
+                const AccelX =prep.map(entry => parseFloat(entry.maxAccelX));
+                const AccelY =prep.map(entry => parseFloat(entry.maxAccelY));
+                const AccelZ =prep.map(entry => parseFloat(entry.maxAccelZ ));
 
                 
                 setTempData(temp)
@@ -48,80 +48,184 @@ const ChartComponent = () => {
     }, [tempData, rpmData]); // Empty dependency array ensures this effect runs only once when the component mounts
 
   return (
-    <div className='mb-6 grid grid-cols-1 gap-y-12 gap-x-10 md:grid-cols-2 xl:grid-cols-3 '>
+    <div className='mb-6 grid grid-cols-1 gap-y-12 gap-x-10 md:grid-cols-1 xl:grid-cols-1 '>
         <div className='flex flex-col gap-4 items-center'>
             <Typography className="font-bold text-black text-2xl" >Temperature</Typography>
-            <div className="bg-red-500 rounded-xl ">
+            <div className="bg-[#242424] rounded-xl items-center shadow-xl">
                 
                 <LineChart
                     xAxis={[{ data: Array.from({ length: tempData.length }, (_, i) => i + 1) }]}
                     series={[
                         {
-                            data: tempData,  color: '#000000'
+                            data: tempData,  color: '#55B475',                            
                         },
                     ]}
-                    width={500}
-                    height={300}
+                    sx={{
+                        //change left yAxis label styles
+                       "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel":{
+                        strokeWidth:"0.4",
+                        fill:"#ffffff"
+                       },
+                       
+                        // change bottom label styles
+                        "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel":{
+                            strokeWidth:"0.5",
+                            fill:"#ffffff"
+                         },
+                          // bottomAxis Line Styles
+                         "& .MuiChartsAxis-bottom .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4,
+                        
+                         },
+                         // leftAxis Line Styles
+                         "& .MuiChartsAxis-left .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4
+                         }
+                      }}
+                    width={1000}
+                    height={500}
+
                 />
                 </div>
 
         </div>
         <div className='flex flex-col gap-4 items-center'>
             <Typography className="font-bold text-black text-2xl" >RPM Data</Typography>
-            <div className="bg-purple-500 rounded-xl items-center">
+            <div className="bg-[#242424] rounded-xl items-center shadow-xl">
                 
                 <LineChart
-                    xAxis={[{ data: Array.from({ length: rpmData.length }, (_, i) => i + 1) }]}
+                    xAxis={[{ data: Array.from({ length: rpmData.length }, (_, i) => i + 1),label:"time", color: '#ffffff' }] }
                     series={[
                         {
                             data: rpmData,  color: '#000000'
                         },
                     ]}
-                    width={500}
-                    height={300}
+                    sx={{
+                        //change left yAxis label styles
+                       "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel":{
+                        strokeWidth:"0.4",
+                        fill:"#ffffff"
+                       },
+                       
+                        // change bottom label styles
+                        "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel":{
+                            strokeWidth:"0.5",
+                            fill:"#ffffff"
+                         },
+                          // bottomAxis Line Styles
+                         "& .MuiChartsAxis-bottom .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4,
+                        
+                         },
+                         // leftAxis Line Styles
+                         "& .MuiChartsAxis-left .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4
+                         }
+                      }}
+                    yAxis={[{color: '#ffffff'}]}
+                    width={1000}
+                    height={500}
                 />
            </div>
 
         </div>
         <div className='flex flex-col gap-4 items-center'>
             <Typography className="font-bold text-black text-2xl" >Gyro Data</Typography>
-            <div className="bg-green-500 rounded-xl items-center">
+            <div className="bg-[#242424] rounded-xl items-center shadow-xl">
                 
                 <LineChart
                     xAxis={[{ data: Array.from({ length: rpmData.length }, (_, i) => i + 1) }]}
                     series={[
                         {
-                            data: gyroxData,  color: '#000000'
+                            curve: "catmullRom",data: gyroxData,  color: '#00FF31'
                         },
-                        { curve: "linear", data: gyroyData},
+                        { curve: "catmullRom", data: gyroyData, color: '#0D00FF'
+                        }
                         
                     ]}
-                    width={500}
-                    height={300}
+                    sx={{
+                        //change left yAxis label styles
+                       "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel":{
+                        strokeWidth:"0.4",
+                        fill:"#ffffff"
+                       },
+                       
+                        // change bottom label styles
+                        "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel":{
+                            strokeWidth:"0.5",
+                            fill:"#ffffff"
+                         },
+                          // bottomAxis Line Styles
+                         "& .MuiChartsAxis-bottom .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4,
+                        
+                         },
+                         // leftAxis Line Styles
+                         "& .MuiChartsAxis-left .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4
+                         }
+                      }}
+                    width={1000}
+                    height={500}
                 />
            </div>
 
         </div>
         <div className='flex flex-col gap-4 items-center'>
             <Typography className="font-bold text-black text-2xl" >Acceleration</Typography>
-            <div className="bg-pink-500 rounded-xl items-center">
+            <div className=" bg-[#242424] rounded-xl items-center shadow-xl">
                 
                 <LineChart
-                    xAxis={[{ data: Array.from({ length: rpmData.length }, (_, i) => i + 1) }]}
+            
+                    xAxis={[{  scaleType: 'point', data: Array.from({ length: rpmData.length }, (_, i) => i + 1) }]}
                     series={[
                         {
-                            data: AccXData,  color: '#000000'
+                            data: AccXData,  area: true, stack: 'total', showMark: false,color:"#FFFF00" 
                         },
                         {
-                            data: AccYData,  color: '#000000'
+                            data: AccYData,  area: true, stack: 'total', showMark: false, color:"#FF7600"
                         },
                         {
-                            data: AccZData,  color: '#000000'
+                            data: AccZData,  area: true, stack: 'total', showMark: false, color: "#f51e1e"
                         },
                     ]}
-                    width={500}
-                    height={300}
+                    sx={{
+                        '.MuiLineElement-root': {
+                            display: 'none',
+                          },
+                        //change left yAxis label styles
+                       "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel":{
+                        strokeWidth:"0.4",
+                        fill:"#ffffff"
+                       },
+                       
+                        // change bottom label styles
+                        "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel":{
+                            strokeWidth:"0.5",
+                            fill:"#ffffff"
+                         },
+                          // bottomAxis Line Styles
+                         "& .MuiChartsAxis-bottom .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4,
+                        
+                         },
+                         // leftAxis Line Styles
+                         "& .MuiChartsAxis-left .MuiChartsAxis-line":{
+                          stroke:"#ffffff",
+                          strokeWidth:0.4
+                         }
+                      }}
+                    width={1000}
+                    height={500}
                 />
+                
            </div>
 
         </div>

@@ -1,8 +1,9 @@
 import React , {useState, useEffect}from "react";
 import axios from "axios";
 import {
-  Typography,
+  Box,
   Select,
+  Typography,
   Option,
   Card,
   CardHeader,
@@ -18,6 +19,7 @@ import {
   Input,
   Button
 } from "@material-tailwind/react";
+
 import {
   ClockIcon,
   CheckIcon,
@@ -38,11 +40,25 @@ import RpmData from "@/apiData/RpmData"
 import TempData from "@/apiData/TempData";
 import Temperature from "@/apiData/Temperature";
 import ChartComponent from "@/apiData/ChartComponent";
+import CardsComponent from "@/apiData/CardsComponent"
 import model from "@/ml/MlModel";
 import MlModel from "@/ml/MlModel";
 
-export function Home() {
 
+export function Home() {
+  const [selectedOption, setSelectedOption] = useState('');
+  const [showItems, setShowItems] = useState(false);
+
+  const options = [
+    { value: 'option1', image: '/public/img/bruce-mars.jpeg', text: 'Information about option 1' },
+    { value: 'option2', image: '/public/img/bruce-mars.jpeg', text: 'Details related to option 2' },
+    { value: 'option3', image: '/public/img/bruce-mars.jpeg', text: 'Description of option 3' },
+  ];
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+    setShowItems(true);
+  };
 
 
   
@@ -52,26 +68,18 @@ export function Home() {
 
 
   return (
-    <div className="mt-12">
-      <Typography variant="h2" color="blue-gray" className="mb-10">
+    <div className="mt-12 ">
+      <div className="text-[#1e96fc] text-[2.5rem] font-bold  ">
         Welcome to Telemetry Portal!
-      </Typography>
-      <div className="flex flex-row gap-3">
-        <Typography variant="h4" color="blue-gray" className="mb-10">
-          Driver Number:
-        </Typography>
-
-        <div className="w-72">
-          <Select label="Select driver ID">
-            <Option>12242</Option>
-            <Option>34123</Option>
-            <Option>23123</Option>
-
-          </Select>
-        </div>
+      </div>
+      <div className="text-[#ffffff] font-light pb-5">Your Mine's GPS to Profits. Track every haul, optimize routes, and boost safety. Real-time data, actionable insights. Take control, maximize profits.</div>
+      
+      <div className="text-[#1e96fc] text-[2rem] font-bold">
+        Dashboard Status Check
       </div>
 
-      <div className="mb-12 px-20 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-2">
+
+      <div className="mb-12 px-20 pt-10 grid gap-y-10 gap-x-6 md:grid-cols-3 xl:grid-cols-3">
 
 
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
@@ -90,246 +98,54 @@ export function Home() {
             }
           />
         ))}
-      </div>
-      <div className="">
-       {/*<div className="flex flex-col gap-2 items-center">
-          <Typography className="font-bold text-black text-2xl" >Speed Data</Typography>
-          <SpeedData />
+          </div>
+          <div className="flex flex-row gap-3">
+        <div className="text-[#ffffff] text-xl font-bold ">
+          Vehicle ID:
         </div>
-         
-        <div className="flex flex-col gap-2 items-center">
-          <Typography className="font-bold text-black text-2xl" >Coolant data</Typography>
-          <CoolantData />
-        </div>
-        <div className="flex flex-col gap-2 items-center">
-          <Typography className="font-bold text-black text-2xl" >RPM data</Typography>
-          <RpmData />
-        </div>
-        <div className="flex flex-col gap-2 items-center">
-          <Typography className="font-bold text-black text-2xl" >Temperature</Typography>
-          <TempData />
-        </div>
-        <div className="flex flex-col gap-2 items-center">
-          <Typography className="font-bold text-black text-2xl" >Temperature</Typography>
-          <Temperature />
-          </div>*/ }
-          <ChartComponent />
-         
-        
-      </div>
-      <div className="">
-      <Typography variant="h2" color="blue-gray" className="mb-10">
-        Data Analysis
-      </Typography>
-        <MlModel/>
-      </div>
-      
-      
 
-      {/*
-      <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsChartsData.map((props) => (
-          <StatisticsChart
-            key={props.title}
-            {...props}
-            footer={
-              <Typography
-                variant="small"
-                className="flex items-center font-normal text-blue-gray-600"
-              >
-                <ClockIcon strokeWidth={2} className="h-4 w-4 text-inherit" />
-                &nbsp;{props.footer}
-              </Typography>
-            }
-          />
-        ))}
-      </div>
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <Card className="overflow-hidden xl:col-span-2">
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 flex items-center justify-between p-6"
-          >
+        <div>
+          <select value={selectedOption} onChange={handleChange}>
+            <option value="">Select an option</option>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.value}
+              </option>
+            ))}
+          </select>
+
+          {selectedOption && (
             <div>
-              <Typography variant="h6" color="blue-gray" className="mb-1">
-                Projects
-              </Typography>
-              <Typography
-                variant="small"
-                className="flex items-center gap-1 font-normal text-blue-gray-600"
-              >
-                <CheckIcon strokeWidth={3} className="h-4 w-4 text-blue-500" />
-                <strong>30 done</strong> this month
-              </Typography>
+              <img src={options.find((o) => o.value === selectedOption).image} alt={selectedOption} />
+              <p>{options.find((o) => o.value === selectedOption).text}</p>
             </div>
-            <Menu placement="left-start">
-              <MenuHandler>
-                <IconButton size="sm" variant="text" color="blue-gray">
-                  <EllipsisVerticalIcon
-                    strokeWidth={3}
-                    fill="currenColor"
-                    className="h-6 w-6"
-                  />
-                </IconButton>
-              </MenuHandler>
-              <MenuList>
-                <MenuItem>Action</MenuItem>
-                <MenuItem>Another Action</MenuItem>
-                <MenuItem>Something else here</MenuItem>
-              </MenuList>
-            </Menu>
-          </CardHeader>
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-            <table className="w-full min-w-[640px] table-auto">
-              <thead>
-                <tr>
-                  {["companies", "members", "budget", "completion"].map(
-                    (el) => (
-                      <th
-                        key={el}
-                        className="border-b border-blue-gray-50 py-3 px-6 text-left"
-                      >
-                        <Typography
-                          variant="small"
-                          className="text-[11px] font-medium uppercase text-blue-gray-400"
-                        >
-                          {el}
-                        </Typography>
-                      </th>
-                    )
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {projectsTableData.map(
-                  ({ img, name, members, budget, completion }, key) => {
-                    const className = `py-3 px-5 ${
-                      key === projectsTableData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
+          )}
+        </div>
+      </div>
+      {showItems && ( 
+        <div>
+          <div className="">  
+            <div className="text-[#1e96fc] text-[2rem] font-bold">
+              Vehicle Metrics
+            </div>
+            <CardsComponent />
+            <div className="text-[#1e96fc] text-[2rem] font-bold">
+              Data Analytics
+            </div>
+            <ChartComponent />          
+          </div>
+          <div className="">
+            <Typography variant="h2" color="blue-gray" className="mb-10">
+              Data Prediction
+            </Typography>
+            <MlModel/>
+          </div>
+        </div>
+        )}
+      
+      
 
-                    return (
-                      <tr key={name}>
-                        <td className={className}>
-                          <div className="flex items-center gap-4">
-                            <Avatar src={img} alt={name} size="sm" />
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-bold"
-                            >
-                              {name}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className={className}>
-                          {members.map(({ img, name }, key) => (
-                            <Tooltip key={name} content={name}>
-                              <Avatar
-                                src={img}
-                                alt={name}
-                                size="xs"
-                                variant="circular"
-                                className={`cursor-pointer border-2 border-white ${
-                                  key === 0 ? "" : "-ml-2.5"
-                                }`}
-                              />
-                            </Tooltip>
-                          ))}
-                        </td>
-                        <td className={className}>
-                          <Typography
-                            variant="small"
-                            className="text-xs font-medium text-blue-gray-600"
-                          >
-                            {budget}
-                          </Typography>
-                        </td>
-                        <td className={className}>
-                          <div className="w-10/12">
-                            <Typography
-                              variant="small"
-                              className="mb-1 block text-xs font-medium text-blue-gray-600"
-                            >
-                              {completion}%
-                            </Typography>
-                            <Progress
-                              value={completion}
-                              variant="gradient"
-                              color={completion === 100 ? "green" : "blue"}
-                              className="h-1"
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
-            </table>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 p-6"
-          >
-            <Typography variant="h6" color="blue-gray" className="mb-2">
-              Orders Overview
-            </Typography>
-            <Typography
-              variant="small"
-              className="flex items-center gap-1 font-normal text-blue-gray-600"
-            >
-              <ArrowUpIcon
-                strokeWidth={3}
-                className="h-3.5 w-3.5 text-green-500"
-              />
-              <strong>24%</strong> this month
-            </Typography>
-          </CardHeader>
-          <CardBody className="pt-0">
-            {ordersOverviewData.map(
-              ({ icon, color, title, description }, key) => (
-                <div key={title} className="flex items-start gap-4 py-3">
-                  <div
-                    className={`relative p-1 after:absolute after:-bottom-6 after:left-2/4 after:w-0.5 after:-translate-x-2/4 after:bg-blue-gray-50 after:content-[''] ${
-                      key === ordersOverviewData.length - 1
-                        ? "after:h-0"
-                        : "after:h-4/6"
-                    }`}
-                  >
-                    {React.createElement(icon, {
-                      className: `!w-5 !h-5 ${color}`,
-                    })}
-                  </div>
-                  <div>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="block font-medium"
-                    >
-                      {title}
-                    </Typography>
-                    <Typography
-                      as="span"
-                      variant="small"
-                      className="text-xs font-medium text-blue-gray-500"
-                    >
-                      {description}
-                    </Typography>
-                  </div>
-                </div>
-              )
-            )}
-          </CardBody>
-        </Card>
-                  </div> */}
+      
                 
     </div>
   );

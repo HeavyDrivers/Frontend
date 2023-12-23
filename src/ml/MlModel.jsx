@@ -85,7 +85,7 @@ const MlModel = () => {
 
 
   return (
-    <div className='w-[700px] flex flex-col items-center gap-2'>
+    <div className='flex flex-col items-center gap-2 overflow-scroll'>
         
         <Typography className="font-bold text-black text-2xl" >Gyroscopic analysis</Typography>
         <div className='bg-yellow-500 rounded-xl'>
@@ -98,8 +98,8 @@ const MlModel = () => {
                         },
                         
                     ]}
-                    width={500}
-                    height={300}
+                    width={1000}
+                    height={500}
                 />
         
 

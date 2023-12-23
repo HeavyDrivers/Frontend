@@ -2,26 +2,26 @@
 
 import {
   RocketLaunchIcon,
-  TruckIcon, ChartBarIcon, UserGroupIcon
+  TruckIcon, ChartBarIcon, UserGroupIcon, WrenchScrewdriverIcon
 } from "@heroicons/react/24/solid";
 
 export const statisticsCardsData = [
   {
     color: "blue",
     icon: UserGroupIcon,
-    title: "Driver Status",
-    value: "Idle",
+    title: "Vehicle's Online",
+    value: "104",
     footer: {
       color: "text-red-500",
-      value: "",
-      label: "",
+      value: "-2%",
+      label: "than average",
     }, 
   },
   {
     color: "orange",
-    icon: TruckIcon,
-    title: "Load",
-    value: "800kg",
+    icon: WrenchScrewdriverIcon,
+    title: "Vehicle's Under Maintaince",
+    value: "8",
     footer: {
       color: "text-green-500",
       value: "+5%",
@@ -39,17 +39,7 @@ export const statisticsCardsData = [
       label: "than average",
     },
   },
-  {
-    color: "red",
-    icon: ChartBarIcon,
-    title: "Fuel Efficiency",
-    value: "80%",
-    footer: {
-      color: "text-red-500",
-      value: "-2%",
-      label: "than ideal",
-    },
-  },
+
 ];
 
 export default statisticsCardsData;

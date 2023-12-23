@@ -12,14 +12,16 @@ const RouteTracker = () => {
   const [endtime, setEndtime] = useState("");
   const [locationdata, setLocationdata] = useState("");
   const [mapdata, setMapdata] = useState("");
-
+  const [latitude, setLatitude] = useState([]);
+  const [longitude, setLongitude] = useState();
   const styleMap = {
     width: "99%",
     height: "30rem",
     display: "inline-block",
   };
-
-  const mapProps = {
+  let arr = [];
+  let num1, num2;
+  /*const mapProps = {
     center: locationdata
       ? locationdata[0]
         ? [locationdata[0].latitude, locationdata[0].longitude]
@@ -29,10 +31,10 @@ const RouteTracker = () => {
     zoom: 15,
     clickableIcons: false,
     geolocation: true,
-  };
+  };*/
 
   const generatemapview = async () => {
-    console.log(endtime, starttime);
+    /*console.log(endtime, starttime);
     await axios
       .post("https://backend-for-sih.onrender.com/get_locations_between", {
         startTime: starttime,
@@ -47,10 +49,41 @@ const RouteTracker = () => {
     locationdata.forEach((element) => {
       dataobject.push({ lat: element.latitude, lng: element.longitude });
     });
-    setMapdata(dataobject);
+    setMapdata(dataobject);*/
     // console.log("dataobject", dataobject);
+    try {
+      const response = await axios.post("https://tcu-backend-69pu.onrender.com/get_tempfrom_ubi");
+      
+      const ans = response.data;
+      console.log(ans)
+
+     // console.log("Temp Raw Data:", ans);
+      const prep = Array.from(ans);
+     // console.log(typeof(prep))
+      const lat = prep.slice(-10).map(entry => parseFloat(entry.latitude));
+      console.log(typeof(lat));
+      setLatitude(lat);
+
+      const lng = prep.slice(-10).map(entry => parseFloat(entry.longitude));
+      console.log("long data:", lng);
+      setLongitude(lng);
+      arr = [lat[5],lng[5]];
+      //console.log(typeof(arr))
+      num1 = parseFloat(lat[0]);
+      num2 = parseFloat(lng[0]);
+      const dataobject = lat.map((name, index) => ({
+        x: lat[index],
+        y: lng[index],
+     
+      }));
+      const arrayOfObj = Object.entries(dataobject).map((e) => ( { [e[0]]: e[1] } ));
+      
+      console.log(arrayOfObj)
+      console.log(typeof(arrayOfObj))
+    
     let mapObject;
     let mapplsClassObject = new mappls();
+    const  mapProps  = {center: arr, traffic:  false, zoom: 15, geolocation:  false, clickableIcons:  false }
     mapplsClassObject.initialize("96233e993b889a2ca1bf4520451c693c", () => {
       mapObject = mapplsClassObject.Map({
         id: "map2",
@@ -63,33 +96,34 @@ const RouteTracker = () => {
           map: mapObject,
           strokeColor: "#333", // polyline color
           strokeWeight: 2, // stroke/ width of polyline
-          path: dataobject
-            ? dataobject
-            : [
+          path: [
                 {
-                  lat: 12.9102775,
-                  lng: 77.56497283333333,
+                  lat: 12.28,
+                  lng: 76.641,
                 },
                 {
-                  lat: 12.9202775,
-                  lng: 77.66497283333333,
+                  lat: 12.28,
+                  lng: 77.642,
                 },
                 {
-                  lat: 12.9302775,
-                  lng: 77.76497283333333,
+                  lat: 12.28,
+                  lng: 77.643,
                 },
                 {
-                  lat: 12.9102775,
-                  lng: 77.76497283333333,
+                  lat: 12.28,
+                  lng: 77.644,
                 },
                 {
-                  lat: 12.9802775,
-                  lng: 77.26497283333333,
+                  lat: 12.28,
+                  lng: 77.645,
                 },
               ],
         });
       });
-    });
+    
+    })} catch (error) {
+      console.error("Error fetching or processing speed data:", error);
+    }
   };
 
   const setstarttime = (e) => {
