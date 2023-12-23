@@ -1,7 +1,7 @@
-body{
-    background: linear-gradient(to right, #3C4142 , rgb(0, 0, 0));
-    align-items: center;
-    justify-content: center;
+body {
+  background: linear-gradient(to right, #3c4142, rgb(0, 0, 0));
+  align-items: center;
+  justify-content: center;
 }
 
 /* .landing{
@@ -13,17 +13,17 @@ body{
     position: relative;
 } */
 
-.header{
-    padding: 20px;
-    margin: 20px;
-    color: whitesmoke;
-    font-family: anton;
-    font-style:normal;
-    font-size: 20vh;
+.header {
+  padding: 20px;
+  margin: 20px;
+  color: whitesmoke;
+  font-family: anton;
+  font-style: normal;
+  font-size: 20vh;
 }
 
-.description{
-    margin-bottom: 20px;
-    color: aliceblue;
-    font-size: 4vh;
+.description {
+  margin-bottom: 20px;
+  color: aliceblue;
+  font-size: 4vh;
 }

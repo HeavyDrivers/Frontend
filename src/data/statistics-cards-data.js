@@ -2,7 +2,10 @@
 
 import {
   RocketLaunchIcon,
-  TruckIcon, ChartBarIcon, UserGroupIcon, WrenchScrewdriverIcon
+  TruckIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
 
 export const statisticsCardsData = [
@@ -15,7 +18,7 @@ export const statisticsCardsData = [
       color: "text-red-500",
       value: "-2%",
       label: "than average",
-    }, 
+    },
   },
   {
     color: "orange",
@@ -28,18 +31,6 @@ export const statisticsCardsData = [
       label: "than yesterday",
     },
   },
-  {
-    color: "green",
-    icon: RocketLaunchIcon,
-    title: "Speed",
-    value: "40 Km/h",
-    footer: {
-      color: "text-red-500",
-      value: "-2%",
-      label: "than average",
-    },
-  },
-
 ];
 
 export default statisticsCardsData;

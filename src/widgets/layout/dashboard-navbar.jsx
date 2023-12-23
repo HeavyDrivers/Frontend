@@ -25,7 +25,7 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "@/context";
-import { SignOutButton } from "@clerk/clerk-react"
+import { SignOutButton } from "@clerk/clerk-react";
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
@@ -86,25 +86,21 @@ export function DashboardNavbar() {
 
           <div>
             <Button
-                variant="text"
-                color="blue-gray"
-                className="hidden items-center gap-1 px-4 xl:flex"
-              >
-                <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-                <SignOutButton afterSignOutUrl="/" />
-              </Button>
-              <IconButton
-                variant="text"
-                color="blue-gray"
-                className="grid xl:hidden"
-              >
-                <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-              </IconButton>
-          
-
+              variant="text"
+              color="blue-gray"
+              className="hidden items-center gap-1 px-4 xl:flex"
+            >
+              <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+              <SignOutButton afterSignOutUrl="/" />
+            </Button>
+            <IconButton
+              variant="text"
+              color="blue-gray"
+              className="grid xl:hidden"
+            >
+              <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
+            </IconButton>
           </div>
-
-          
 
           {/*<Link to="/auth/sign-in">
           
