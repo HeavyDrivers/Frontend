@@ -1,13 +1,29 @@
-.landing{
-    background-color: #000000;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    /* position: fixed; */
+body{
+    background: linear-gradient(to right, #3C4142 , rgb(0, 0, 0));
+    align-items: center;
+    justify-content: center;
 }
 
+/* .landing{
+    background-color: #000000;
+   
+    background-size: auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+} */
+
 .header{
+    padding: 20px;
+    margin: 20px;
+    color: whitesmoke;
     font-family: anton;
     font-style:normal;
     font-size: 20vh;
+}
+
+.description{
+    margin-bottom: 20px;
+    color: aliceblue;
+    font-size: 4vh;
 }

@@ -7,6 +7,7 @@ import './App.css'
 
 function App() {
   return (
+    <div className="mainpage">
     <div className="landing">
       
         
@@ -17,7 +18,6 @@ function App() {
            Drive Data Beyond Limits: Empower Your Fleet with Unrivaled Telemetry Mastery 
           </div>
           <br/>
-        
                   <Button color="blue">
                     <SignInButton />
                   </Button>  
@@ -29,9 +29,9 @@ function App() {
         <SignedIn>
           <Routes>
             <Route path="/dashboard/*" element={<Dashboard />} />
-            <Route path="/auth/*" element={<Auth />} />
+            {/* <Route path="/auth/*" element={<Auth />} /> */}
             <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
-            <Route path="/auth/*" element={<Auth />} />
+            {/* <Route path="/auth/*" element={<Auth />} /> */}
           </Routes>
         </SignedIn>
       </div>
@@ -39,6 +39,7 @@ function App() {
       
       
 
+    </div>
     </div>
     
   );
