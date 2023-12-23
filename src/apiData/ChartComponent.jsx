@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LineChart, BarChart } from "@mui/x-charts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "@mui/x-charts";
 import {
     Typography
   } from "@material-tailwind/react";
